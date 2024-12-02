@@ -6,12 +6,12 @@ import base64
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*", "allow_headers": ["Content-Type"]}})
 
-API_URL_Generate = "https://267p1sqnhuz2pn-7860.proxy.runpod.net/v2/generation/text-to-image-with-ip"
+API_URL_Generate = "https://4hwuq3qhogdp5p-7860.proxy.runpod.net/v2/generation/text-to-image-with-ip"
 
-API_URL_UPSCALE = "https://267p1sqnhuz2pn-7860.proxy.runpod.net/v2/generation/image-upscale-vary"
+API_URL_UPSCALE = "https://4hwuq3qhogdp5p-7860.proxy.runpod.net/v2/generation/image-upscale-vary"
 
-def transform_url(url):
-    return url.replace('http://127.0.0.1:7860', 'https://267p1sqnhuz2pn-7860.proxy.runpod.net')
+# def transform_url(url):
+#     return url.replace('http://127.0.0.1:7860', 'https://267p1sqnhuz2pn-7860.proxy.runpod.net')
 
 
 @app.route('/generate-image', methods=['POST'])
@@ -141,10 +141,10 @@ def generate_image():
         response.raise_for_status()
         data = response.json()
         
-        # Transform URLs in response
-        for item in data:
-            if item.get('url'):
-                item['url'] = transform_url(item['url'])
+        # # Transform URLs in response
+        # for item in data:
+        #     if item.get('url'):
+        #         item['url'] = transform_url(item['url'])
                 
         return jsonify(data)
     except requests.exceptions.RequestException as e:
@@ -276,10 +276,10 @@ def upscale():
         response.raise_for_status()
         data = response.json()
         
-        # Transform URLs in response
-        for item in data:
-            if item.get('url'):
-                item['url'] = transform_url(item['url'])
+        # # Transform URLs in response
+        # for item in data:
+        #     if item.get('url'):
+        #         item['url'] = transform_url(item['url'])
                 
         return jsonify(data)
     except requests.exceptions.RequestException as e:
